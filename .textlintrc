@@ -1,0 +1,60 @@
+{
+  "filters": {},
+  "rules": {
+    // https://github.com/textlint-ja/textlint-rule-preset-japanese
+    "preset-japanese": {
+      // 一文で使える"、"の数
+      "max-ten": {
+        "max": 3
+      },
+      // 逆接の接続助詞「が」が、同一文中に複数回出現していないかどうか
+      // e.g.) 今日は早朝から出発したが、定刻には間に合わなかったが、無事会場に到着した。
+      "no-doubled-conjunctive-particle-ga": true,
+      // 二重否定の検出
+      "no-double-negative-ja": true,
+      // 一文の最大の長さ
+      "sentence-length" : {
+        "severity": "warning", // 数式を検出してもエラーにしない
+        "max": 100
+      },
+      // ら抜き言葉を使用しない
+      "no-dropping-the-ra": true,
+      // 文の敬体(ですます調)、常体(である調)のチェック
+      "no-mix-dearu-desumasu": {
+        "preferInHeader": "である", // "である" or "ですます"
+        "preferInBody": "である",// "である" or "ですます"
+        "preferInList": "である",    // "である" or "ですます"
+        // 文末以外でも、敬体(ですます調)と常体(である調)を厳しくチェックするかどうか
+        "strict": false
+      }
+    },
+    // 技術文書向け
+    // https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing
+    "preset-ja-technical-writing": {
+      // 連続できる最大の漢字長
+      "max-kanji-continuous-len": false,
+      // 文末の句点
+      "ja-no-mixed-period": {
+        "periodMark": "．",
+        "allowPeriodMarks": ["．", "."],
+        "allowEmojiAtEnd": false
+      },
+      // 弱い日本語
+      "ja-no-weak-phrase": true,
+      // よくある誤用
+      "ja-no-abusage": true
+    },
+    // 工学系論文向け
+    // https://github.com/kn1cht/textlint-rule-preset-ja-engineering-paper
+    "preset-ja-engineering-paper": true,
+    // 表記ゆれ
+    // https://github.com/textlint-ja/textlint-rule-no-synonyms
+    "@textlint-ja/no-synonyms": {
+      "allowAlphabet": false,
+      "allowNumber": true
+    },
+    // 同一の単語を間違えて連続しているのを見つけるtextlintルール
+    // https://github.com/textlint-ja/textlint-rule-ja-no-successive-word
+    "ja-no-successive-word": true
+  }
+}

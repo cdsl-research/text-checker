@@ -1,0 +1,32 @@
+rules:
+    - expected: Docker
+    - expected: Python
+    - expected: Kubernetes
+    - expected: Istio
+    - expected: Ubuntu
+    - expected: Linux
+    - expected: Nginx
+    - expected: Apache
+    - expected: PHP
+    - expected: Ansible
+    - expected: SSH
+    - expected: Bash
+    - expected: Google Chrome
+    - expected: Ingress
+    - expected: Elasticsearch
+    - expected: Kibana
+    - expected: Grafana
+    - expected: Prometheus
+    - expected: Datadog
+    - expected: Amazon
+    - expected: Microsoft
+    - expected: Mackerel
+    - expected: Firefox
+    - expected: Web
+    - expected: HTTP
+    - expected: TCP
+    - expected: IP
+    - expected: UDP
+
+
+
