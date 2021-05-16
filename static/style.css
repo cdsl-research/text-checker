@@ -1,0 +1,10 @@
+table tr th {
+    background-color: #111;
+    color: #fff;
+}
+table td {
+    background: #eee;
+}
+table tr:nth-child(odd) td {
+    background: #fff;
+}

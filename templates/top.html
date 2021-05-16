@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Top</title>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -14,6 +14,7 @@
         <button type="button" id="analyze">解析</button>
         <aside id="progress"></aside>
     </header>
+    <br>
     <main id="result">
     </main>
     <script type="text/javascript">
@@ -45,11 +46,14 @@
             ];
 
             // 1行目
+            let row = document.createElement("tr");
             labels.forEach(label => {
                 const cellText = document.createTextNode(label);
-                const cell = document.createElement("td");
+                const cell = document.createElement("th");
                 cell.appendChild(cellText);
+                row.appendChild(cell);
             })
+            table.appendChild(row);
 
             // 2行目以降
             const res = dat.result;
@@ -58,8 +62,8 @@
                 labels.forEach(label => {
                     const cell = document.createElement("td");
                     const cellText = document.createTextNode(res[key][label]);
-                    cell.appendChild(cellText);
                     // console.log(typeof(res[key][label]));
+                    cell.appendChild(cellText);
                     row.appendChild(cell);
                 });
                 table.appendChild(row);
