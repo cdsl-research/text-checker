@@ -18,4 +18,14 @@ async def top(request: Request):
 
 @app.post("/api/v1/analysis")
 async def upload(file: UploadFile = File(...)):
-    return {"file": file}
+    import pdf_to_text
+    raw_text = pdf_to_text.pdf_to_text(file.file)
+
+    import subprocess
+    from os import getcwd
+    result = subprocess.run(["npx", "textlint", "--format", "json", "--stdin"], \
+        cwd=getcwd()+"/textlint", input=raw_text, encoding='utf-8', stdout=subprocess.PIPE)
+    print(result.stdout)
+    import json
+    result_json = json.loads(result.stdout)
+    return {"result": result_json[0]["messages"]}

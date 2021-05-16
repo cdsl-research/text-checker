@@ -11,10 +11,10 @@
         <p>アップロードされたPDFを自動でレビューします．</p>
         <input type="file" id="artifact" accept="application/pdf" enctype="multipart/form-data">
         <br>
-        <button type="button" id="analyze">解析</button>    
+        <button type="button" id="analyze">解析</button>
+        <aside id="progress"></aside>
     </header>
-    <main>
-        
+    <main id="result">
     </main>
     <script type="text/javascript">
         // ファイルを送信する関数
@@ -30,9 +30,49 @@
             return await fetch(url, options)
         }
 
+        // tableを組み立てる関数
+        function displayTable(dat) {
+            // console.log(dat.result)
+            // 結果の表示
+            const table = document.createElement("table");
+            const labels = [
+                "message",
+                "index",
+                "line",
+                "column",
+                "severity",
+                "ruleId"
+            ];
+
+            // 1行目
+            lebales.forEach(label => {
+                const cellText = document.createTextNode(label);
+                const cell = document.createElement("td");
+                cell.appendChild(cellText);
+            })
+
+            // 2行目以降
+            const res = dat.result;
+            Object.keys(res).forEach(key => {
+                let row = document.createElement("tr");
+                labels.forEach(label => {
+                    const cell = document.createElement("td");
+                    const cellText = document.createTextNode(res[key][label]);
+                    cell.appendChild(cellText);
+                    // console.log(typeof(res[key][label]));
+                    row.appendChild(cell);
+                });
+                table.appendChild(row);
+            });
+            document.querySelector("#result").appendChild(table);
+        }
+
         // ボタンのクリック
         const uploadFile = document.querySelector("#analyze");
         uploadFile.addEventListener("click", (event) => {
+            // プログレスの変更
+            document.querySelector("#progress").innerText = "解析しています...";
+
             // ファイルの取得
             const artifact = document.querySelector("#artifact");
             const formData = new FormData();
@@ -45,10 +85,14 @@
                 })
                 .then(response => {
                     if (response.ok) {
+                        document.querySelector("#progress").innerText = "完了しました．";
                         return response.json();
+                    } else {
+                        document.querySelector("#progress").innerText = "失敗しました．";
+                        throw Error('INVALID_STATU_CODE');
                     }
-                    throw Error('INVALID_STATU_CODE');
                 })
+                .then(data => displayTable(data))
         }, false);
     </script>
 </body>
