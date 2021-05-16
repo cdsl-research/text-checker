@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Top</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Technical Report Checker</h1>
+        <p>アップロードされたPDFを自動でレビューします．</p>
+        <input type="file" id="artifact" accept="application/pdf" enctype="multipart/form-data">
+        <br>
+        <button type="button" id="analyze">解析</button>    
+    </header>
+    <main>
+        
+    </main>
+    <script type="text/javascript">
+        // ファイルを送信する関数
+        async function postData(data = {}) {
+            const url = 'http://127.0.0.1:8000/api/v1/analysis';
+            const options = {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }
+            return await fetch(url, options)
+        }
+
+        // ボタンのクリック
+        const uploadFile = document.querySelector("#analyze");
+        uploadFile.addEventListener("click", (event) => {
+            // ファイルの取得
+            const artifact = document.querySelector("#artifact");
+            const formData = new FormData();
+            formData.append("file", artifact.files[0]);
+
+            // リクエストの送信
+            const response = postData(formData)
+                .catch(error => {  // リクエスト以前の例外(e.g. Network)
+                    throw Error(error);
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw Error('INVALID_STATU_CODE');
+                })
+        }, false);
+    </script>
+</body>
+</html>
