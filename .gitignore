@@ -1,0 +1,4 @@
+**/.cache/**
+**/__pycache__/**
+textlint/a.txt
+**/node_modules/**
