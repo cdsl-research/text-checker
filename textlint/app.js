@@ -1,11 +1,38 @@
-const http = require('http');
+const http = require('http')
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const hostname = '127.0.0.1'
+const port = 3000
+
+const linter = (text) => {
+    // console.log(text)
+    const TextLintEngine = require("textlint").TextLintEngine
+    const engine = new TextLintEngine()  // Load .textlintrc
+    return engine.executeOnText(text)
+        .then((results) => {
+            // console.log(results[0].messages)
+            if (engine.isErrorResults(results)) {  // have error
+                const output = engine.formatResults(results)
+                console.log(output)
+                return results[0].messages
+            } else {  // have no error
+                throw Error('TETXLINT_RESULTS_ERROR')
+            }
+            /* messages are `TextLintMessage` array.
+            [
+                {
+                    id: "rule-name",
+                    message:"lint message",
+                    line: 1, // 1-based columns(TextLintMessage)
+                    column:1 // 1-based columns(TextLintMessage)
+                }
+            ]
+            */
+        })
+}
 
 const router = (req, res, httpVersion, method, path) => {
-    console.log("HTTP/%d %s %s", method, path, httpVersion);
-    
+    console.log("HTTP/%d %s %s", httpVersion, method, path)
+
     if (method === "GET" && path === "/") {
 
         res.writeHead(200, {
@@ -13,49 +40,52 @@ const router = (req, res, httpVersion, method, path) => {
         });
         const resBody = {
             "status": "Running"
-        };
-        res.write(JSON.stringify(resBody));
-        res.end();
+        }
+        res.write(JSON.stringify(resBody))
+        res.end()
 
     } else if (method === "POST" && path === "/textlint") {
 
         let body = [];
         req.on('error', (err) => {  // Error Handling
 
-            console.error(err);
+            console.error(err)
 
         }).on('data', (chunk) => {  // Append Payload
 
-            body.push(chunk);
-            console.log(body);
+            body.push(chunk)
+            console.log(body)
 
         }).on('end', () => {  // Make Response
-
             // Concat Body
-            body = Buffer.concat(body).toString();
+            body = Buffer.concat(body).toString()
             res.on('error', (err) => {
-                console.error(err);
-            });
+                console.error(err)
+            })
 
-            // todo: textlint 
-
-            // Create Response
-            res.writeHead(200, {
-                'Content-Type': 'application/json',
-            });
-            const resBody = {httpVersion, method, path, body};
-            res.write(JSON.stringify(resBody));
-            res.end();
-
-        });
+            // Call lint func
+            linter(body)
+                .then((reviewedText) => {
+                    // Create Response
+                    res.writeHead(200, {
+                        'Content-Type': 'application/json'
+                    })
+                    const resBody = {
+                        "original_text": body,
+                        "reviewed_results": reviewedText
+                    }
+                    res.write(JSON.stringify(resBody))
+                    res.end()
+                })
+        })
     }
 }
 
 const server = http.createServer((request, response) => {
-    const { httpVersion, headers, url, method } = request;
-    router(request, response, httpVersion, method, url);
-});
+    const { httpVersion, headers, url, method } = request
+    router(request, response, httpVersion, method, url)
+})
 
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+    console.log(`Server running at http://${hostname}:${port}/`)
+})
