@@ -1,0 +1,17 @@
+{
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
