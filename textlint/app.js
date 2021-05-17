@@ -1,6 +1,6 @@
 const http = require('http')
 
-const hostname = '127.0.0.1'
+const hostname = '0.0.0.0'
 const port = 3000
 
 const linter = (text) => {
@@ -12,7 +12,7 @@ const linter = (text) => {
             // console.log(results[0].messages)
             if (engine.isErrorResults(results)) {  // have error
                 const output = engine.formatResults(results)
-                console.log(output)
+                // console.log(output)
                 return results[0].messages
             } else {  // have no error
                 throw Error('TETXLINT_RESULTS_ERROR')
@@ -54,7 +54,7 @@ const router = (req, res, httpVersion, method, path) => {
         }).on('data', (chunk) => {  // Append Payload
 
             body.push(chunk)
-            console.log(body)
+            // console.log(body)
 
         }).on('end', () => {  // Make Response
             // Concat Body
