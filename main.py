@@ -27,7 +27,7 @@ async def upload(file: UploadFile = File(...)):
     result = subprocess.run(["npx", "textlint", "--format", "json", "--stdin"], \
         cwd=getcwd()+"/textlint", input=raw_text, encoding='utf-8', stdout=subprocess.PIPE)
     print("end: textlint")
-    
+
     import json
     result_json = json.loads(result.stdout)
     return {"result": result_json[0]["messages"]}
