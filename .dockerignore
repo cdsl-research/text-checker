@@ -1,0 +1,3 @@
+env/
+__pycache__/
+textlint/node_modules/
