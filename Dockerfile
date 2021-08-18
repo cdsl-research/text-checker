@@ -3,12 +3,12 @@ FROM debian:buster-slim
 COPY . /work
 WORKDIR /work/textlint
 RUN apt-get -y update && \
-    apt-get -y install curl libffi-dev libssl-dev python3 python3-pip nodejs npm && \
+    apt-get -y install curl python3 python3-pip nodejs npm && \
     npm install && \
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-    export PATH="$PATH:$HOME/.cargo/bin"
+    apt-get -y  install build-essential libssl-dev libffi-dev python3-dev cargo
 
 WORKDIR /work
-RUN pip3 install -r requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install -r requirements.txt
 
 CMD ["uvicorn", "main:app"]
