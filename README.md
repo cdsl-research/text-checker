@@ -11,44 +11,15 @@
 
 ## Usage
 
-1. Create Node.js and Python enviroments.
-
-2. Create venv and Install packages.
+1. Run docker-compose
 
 ```
-python -m venv env
-. env/bin/activate
-pip install -U pip
-pip install -r requirements.txt
+docker-compose up --build
 ```
 
-3. Install npm packages.
+2. Access front service
 
-```
-cd textlint/
-npm install
-```
-
-4. Start uvicorn server.
-
-```
-cd ..
-uvicorn main:app
-```
-
-## Docker image
-
-1. Start a container.
- 
-```
-docker run -d -p 3000:8000 hcr.io/cdsl-research/text-checker
-```
-
-2. Access web interface.
-
-```
-curl http://127.0.0.1:3000/
-```
+http://localhost:8000/
 
 ## Note
 

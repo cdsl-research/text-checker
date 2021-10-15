@@ -70,11 +70,7 @@ const router = (req, res, httpVersion, method, path) => {
                     res.writeHead(200, {
                         'Content-Type': 'application/json'
                     })
-                    const resBody = {
-                        "original_text": body,
-                        "reviewed_results": reviewedText
-                    }
-                    res.write(JSON.stringify(resBody))
+                    res.write(JSON.stringify(reviewedText))
                     res.end()
                 })
         })
