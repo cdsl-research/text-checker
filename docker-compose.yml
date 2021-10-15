@@ -1,13 +1,13 @@
 version: "3"
 services:
   front:
-    build: .
+    build: front/
     command: ["main:app", "--reload", "--host", "0.0.0.0"]
     restart: always
     ports:
       - "8000:8000"
     volumes:
-      - .:/work
+      - ./front:/work
   backend:
     build: textlint/
     restart: always
