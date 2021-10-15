@@ -33,10 +33,11 @@ async def upload(file: UploadFile = File(...)):
 
     import requests
     import os
+    api_scheme = os.getenv("TEXTLINT_API_SCHEME", "http")
     api_addr = os.getenv("TEXTLINT_API_ADDR", "backend")
     api_port = int(os.getenv("TEXTLINT_API_PORT", 3000))
     res = requests.post(
-        f"http://{api_addr}:{api_port}/textlint",
+        f"{api_scheme}://{api_addr}:{api_port}/textlint",
         data=raw_text.encode('utf-8')
     )
     print("target:", api_addr, api_port)
