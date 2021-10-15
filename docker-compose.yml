@@ -9,9 +9,9 @@ services:
     volumes:
       - ./front:/work
   backend:
-    build: textlint/
+    build: backend/
     restart: always
     ports:
       - "3000:3000"
     volumes:
-      - ./textlint:/work
+      - ./backend:/work
