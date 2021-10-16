@@ -41,6 +41,8 @@ async def upload(file: UploadFile = File(...)):
         data=raw_text.encode('utf-8')
     )
     print("target:", api_addr, api_port)
+    print("status-code:", res.status_code)
+    print("req-url", res.url)
     print("response:", res.json())
     print("end: textlint")
     return {"result": res.json()}
