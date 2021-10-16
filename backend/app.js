@@ -46,6 +46,8 @@ const router = (req, res, httpVersion, method, path) => {
 
     } else if (method === "POST" && path === "/textlint") {
 
+        console.log("Received Request")
+
         let body = [];
         req.on('error', (err) => {  // Error Handling
 
@@ -54,11 +56,11 @@ const router = (req, res, httpVersion, method, path) => {
         }).on('data', (chunk) => {  // Append Payload
 
             body.push(chunk)
-            // console.log(body)
 
         }).on('end', () => {  // Make Response
             // Concat Body
             body = Buffer.concat(body).toString()
+            console.log(body)
             res.on('error', (err) => {
                 console.error(err)
             })
