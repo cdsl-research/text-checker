@@ -13,6 +13,10 @@
         <p>アップロードされたPDFを自動でレビューします．</p>
         <input type="file" id="artifact" accept="application/pdf" enctype="multipart/form-data">
         <br>
+        <!-- Place this tag where you want the button to render. -->
+        <a class="github-button" href="https://github.com/cdsl-research/text-checker" data-size="large"
+            data-show-count="true" aria-label="Star cdsl-research/text-checker on GitHub">Star</a>
+        <br>
         <button type="button" id="analyze">解析</button>
         <aside id="progress"></aside>
     </header>
@@ -101,6 +105,8 @@
                 .then(data => displayTable(data))
         }, false);
     </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>
