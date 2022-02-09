@@ -11,7 +11,3 @@ services:
   backend:
     build: backend/
     restart: always
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/work
