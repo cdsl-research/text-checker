@@ -40,12 +40,19 @@ async def upload(file: UploadFile = File(...)):
         f"{api_scheme}://{api_addr}:{api_port}/textlint",
         data=raw_text.encode('utf-8')
     )
+    fix_res = []
     print("target:", api_addr, api_port)
     print("status-code:", res.status_code)
     print("req-url", res.url)
     print("response:", res.json())
     print("end: textlint")
-    return {"result": res.json()}
+    for i in res.json():
+        cutting_text = raw_text[i['index']-4:i['index']+5]
+        i['cutting_text'] = cutting_text
+        fix_res.append({'index':i['index'], 'cutting_text':cutting_text, 'message':i['message']})
+    print(fix_res)
+    return {"result":fix_res}
+    #return {"result": res.json()}
 
     """
     import json
