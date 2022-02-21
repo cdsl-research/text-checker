@@ -25,7 +25,7 @@
     </main>
     <script type="text/javascript">
         // ファイルを送信する関数
-        async function postData(data = {}) {
+        async function postData (data = {}) {
             const url = '/api/v1/analysis';
             const options = {
                 method: 'POST',
@@ -38,19 +38,23 @@
         }
 
         // tableを組み立てる関数
-        function displayTable(dat) {
+        function displayTable (dat) {
             // console.log(dat.result)
             // 結果の表示
             const table = document.createElement("table");
+            //const labels = [
+            //    "message",
+            //    "index",
+            //    "line",
+            //    "column",
+            //    "severity",
+            //    "ruleId"
+            //];
             const labels = [
-                "message",
                 "index",
-                "line",
-                "column",
-                "severity",
-                "ruleId"
+                "cutting_text",
+                "message"
             ];
-
             // 1行目
             let row = document.createElement("tr");
             labels.forEach(label => {
