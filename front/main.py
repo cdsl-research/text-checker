@@ -49,7 +49,7 @@ async def upload(file: UploadFile = File(...)):
     for i in res.json():
         cutting_text = raw_text[i['index']-4:i['index']+5]
         i['cutting_text'] = cutting_text
-        fix_res.append({'index':i['index'], 'cutting_text':cutting_text, 'message':i['message']})
+        fix_res.append({'index':i['index']+1, 'cutting_text':cutting_text, 'message':i['message']})
     print(fix_res)
     return {"result":fix_res}
     #return {"result": res.json()}
