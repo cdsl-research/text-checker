@@ -3,7 +3,7 @@
 テクニカルレポート(PDF形式及びdocx形式)をアップロードすると自動でレビューを行うWebアプリケーションです。
 ※このWebアプリケーションは日本語の文書にのみ対応しています。
 
-![image](https://user-images.githubusercontent.com/2428176/130031892-00b88e06-6a14-4a26-9e4c-d63b27102dc1.png)
+![image](/text-checker.PNG)
 
 ## 必要条件
 
@@ -17,6 +17,8 @@
 ```
 docker-compose up --build
 ```
+
+初回は--build
 
 2. 以下のアドレスをブラウザに入力し、接続する。
 
