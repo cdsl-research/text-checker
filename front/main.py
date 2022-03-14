@@ -10,6 +10,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from docx import Document
+import io
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -32,8 +33,8 @@ async def upload(file: UploadFile = File(...)):
         print("this is PDF file")
         print(file.filename)
     elif ".docx" in file.filename:
-        document = Document(file.file)
-        for para in document.paraglaph:
+        document = Document(io.BytesIO(await file.read()))
+        for para in document.paragraphs:
             raw_text += para.text
         print("raw_text:", raw_text)
         print("this is docx file")
