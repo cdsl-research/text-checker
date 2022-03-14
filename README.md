@@ -1,8 +1,30 @@
 # text-checker
 
-テクニカルレポート(PDF形式)をアップロードすると自動でレビューを行うWebアプリケーション．
+テクニカルレポート(PDF形式及びdocx形式)をアップロードすると自動でレビューを行うWebアプリケーション．
+※このWebアプリケーションは日本語の文書にのみ対応しています。
 
 ![image](https://user-images.githubusercontent.com/2428176/130031892-00b88e06-6a14-4a26-9e4c-d63b27102dc1.png)
+
+## 必要条件
+
+- Python v3.7 または最新版
+- Node.js v14 または最新版
+
+## 使い方
+
+1. docker-composeを以下のように実行する。
+
+```
+docker-compose up --build
+```
+
+2. 以下のアドレスをブラウザに入力し、接続する。
+
+http://localhost:8000/
+
+# Eng.ver
+A web application that automatically reviews technical reports (PDF and docx formats) when they are uploaded.
+*This web application only supports documents in Japanese.
 
 ## Requirements
 
@@ -21,7 +43,7 @@ docker-compose up --build
 
 http://localhost:8000/
 
-## Note
+# Note
 
 Upload a pdf file to web app by curl.
 
