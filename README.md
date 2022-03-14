@@ -18,7 +18,7 @@
 docker-compose up --build
 ```
 
-初回は--build
+初回は--buildが必要ですが、二回目以降は必要ありません。
 
 2. 以下のアドレスをブラウザに入力し、接続する。
 
@@ -40,6 +40,8 @@ A web application that automatically reviews technical reports (PDF and docx for
 ```
 docker-compose up --build
 ```
+
+The first time you need to use --build, but not the second and subsequent times.
 
 2. Access front service
 
