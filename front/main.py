@@ -27,7 +27,6 @@ async def upload(file: UploadFile = File(...)):
     import pdf_to_text
     raw_text = ''
     if ".pdf" in file.filename:
-
         raw_text = pdf_to_text.pdf_to_text(file.file)
         print("raw_text:", raw_text)
         print("this is PDF file")
