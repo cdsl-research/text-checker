@@ -1,18 +1,17 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler # 水平スケールを設定
 metadata:
-  name: hpa-worker
-  namespace: kouda
+  name: hpa-demo
+  namespace: demo
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: text-checker
-  minReplicas: 1 # 最小Pod数
+  minReplicas: 3 # 最小Pod数
   maxReplicas: 10 # 最大Pod数
   metrics:
   - type: Resource
     resource:
       name: cpu
-      targetAverageUtilization: 50
-      #targetCPUUtilizationPercentage: 70 # スケールする際の基準
+      targetAverageUtilization: 20
