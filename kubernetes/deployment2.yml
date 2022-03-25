@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: text-checker
+  namespace: demo
 spec:
   replicas: 3
   selector:
@@ -13,20 +14,14 @@ spec:
         app: web
     spec:
       containers:
-      #この中にポートフォワーディングについて書く
-      #nginxとtextchecerのふたつをそれぞれ別で記述
-      #    - name: nginx
-      # image: nginx:1.16
-      # ports:
-      # - containerPort: 3000
       - name: textchecker-front
-        image: ghcr.io/cdsl-research/text-checker/front:master-f0bcbc2
+        image: ghcr.io/cdsl-research/text-checker/front:master-f4f325b
         ports: 
         - containerPort: 8000
         env:
         - name: TEXTLINT_API_ADDR
           value: "127.0.0.1"
       - name: textchecker-backend
-        image: ghcr.io/cdsl-research/text-checker/backend:master-f0bcbc2
+        image: ghcr.io/cdsl-research/text-checker/backend:master-f4f325b
         ports:
         - containerPort: 3000
