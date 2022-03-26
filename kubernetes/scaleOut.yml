@@ -1,4 +1,4 @@
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler # 水平スケールを設定
 metadata:
   name: hpa-demo
@@ -10,8 +10,12 @@ spec:
     name: text-checker
   minReplicas: 3 # 最小Pod数
   maxReplicas: 10 # 最大Pod数
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      targetAverageUtilization: 20
+  targetCPUUtilizationPercentage: 20
+  # metrics:
+  # - type: Resource
+  #   resource:
+  #     name: cpu
+  #     # target: 
+  #     #   type: Utilization
+  #     #   averageUtilization: 20
+  #     # targetAverageUtilization: 20
