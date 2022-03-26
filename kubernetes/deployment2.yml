@@ -21,7 +21,13 @@ spec:
         env:
         - name: TEXTLINT_API_ADDR
           value: "127.0.0.1"
+        resources:
+          requests:
+            cpu: 100m
       - name: textchecker-backend
         image: ghcr.io/cdsl-research/text-checker/backend:master-f4f325b
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            cpu: 100m
